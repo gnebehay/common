@@ -1,0 +1,78 @@
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{blindtext}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usepackage{comment}
+\usepackage{etex}
+\usepackage{float}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage[space]{grffile}
+\usepackage{multirow}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{subcaption}
+\usepackage{standalone}
+\usepackage{tikz}
+\usepackage{todonotes}
+\usepackage{xspace}
+\usepackage[bookmarks=false,pagebackref=false]{hyperref} %Hyperref should go last
+
+%Uncomment this if you want figures to always appear after reference
+%\usepackage{flafter}
+
+%uncomment this to get floating algorithm environments
+%\newfloat{algorithm}{t}{}
+
+%Set graphics path
+\graphicspath{{figures//}}
+
+%hyperref setup
+\hypersetup{breaklinks=true}
+\hypersetup{citecolor=black}
+\hypersetup{colorlinks=true}
+\hypersetup{draft=false}
+\hypersetup{linkcolor=black}
+\hypersetup{linktoc=all}
+\hypersetup{urlcolor=blue}
+
+%tikz setup
+\usetikzlibrary{arrows,backgrounds,calc,external,fit,positioning,shapes}
+\usetikzlibrary{pgfplots.groupplots}
+\tikzexternalize[prefix=ext/]
+
+%Comment next line to use tikz externalisation
+\tikzexternaldisable
+
+%These can come in handy sometimes
+%\tikzset{external/remake next}
+%\tikzset{external/export next=false}
+
+%pgfplots setup
+\pgfplotsset{compat=1.5.1}
+\pgfplotsset{filter discard warning=false}
+
+%Declare argmin, argmax
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+%Use input/output instead of require/ensure
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+%Add command for providing external file dependencies to latexmk
+\makeatletter
+\newcommand*{\addFileDependency}[1]{%
+  \typeout{(#1)}%
+  \@addtofilelist{#1}%
+  \IfFileExists{#1}{}{\typeout{No file #1.}}%
+}
+\makeatother
+
+%Define simple todo command
+\newcommand{\mytodo}[1]{\textcolor{red}{TODO: #1}}

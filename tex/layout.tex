@@ -1,0 +1,38 @@
+\usepackage{microtype}
+%Force footnotes to be at the bottom of the page
+
+%This is the T1 version of computer modern
+%\usepackage{lmodern}
+
+%Times + better looking math:
+%\usepackage{mathptmx}
+
+%or for something more fancy:
+\usepackage{mathpazo} %Palatino+math
+\usepackage{tgpagella} %This does not set a math font
+
+%This sets a nice sans-serif font
+\usepackage[scaled=.92]{helvet}
+
+%Sets font to times, but leaves math symbols alone
+%\usepackage{times}
+
+%Uncomment this if you want figures to always appear after reference
+%\usepackage{flafter}
+
+%hyperref setup
+\hypersetup{breaklinks=true}
+\hypersetup{colorlinks=true}
+\hypersetup{draft=false}
+\hypersetup{linktoc=all}
+\hypersetup{urlcolor=blue}
+\hypersetup{hidelinks} %Colors all links black
+
+\urlstyle{rm}
+
+\makeatletter
+\let\UrlSpecialsOld\UrlSpecials
+\def\UrlSpecials{\UrlSpecialsOld\do\/{\Url@slash}}%
+\def\Url@slash{\@ifnextchar/{\kern-.11em\mathchar47\kern-.2em}%
+    {\kern-.0em\mathchar47\kern-.08em\penalty\UrlBigBreakPenalty}}
+\makeatother

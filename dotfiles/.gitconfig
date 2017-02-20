@@ -1,0 +1,27 @@
+[user]
+	name = Georg Nebehay
+	email = gnebehay@gmail.com
+[color]
+	ui = auto
+[core]
+	editor = vi
+	excludesfile = ~/.gitignore_global
+[difftool]
+	prompt = 0
+[diff]
+	tool = meld
+[merge]
+	tool = meld
+[mergetool]
+	prompt = 0
+[color "status"]
+	added = green bold
+	changed = yellow bold
+	untracked = red bold
+[color "diff"]
+	old = red bold
+	new = green bold
+	meta = yellow bold
+	frag = cyan bold
+[push]
+    default = simple

@@ -1,0 +1,63 @@
+#!/usr/bin/env python
+
+" author: Clemens Korner "
+
+import sys
+import shlex
+import subprocess
+import getopt
+
+def main():
+    """ Set focus on window with specified window title
+        otherwise start the program.
+        CLI - aguments:
+            args[0]: program binary to focus
+                (look in look into the last column of "ps -A")
+            args[1]: execute command to start program
+        The program "wmctrl" must be installed!
+        example: python startOrFocusProgram.py "Mozilla Firefox" firefox """
+    # parse command line options
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "h", ["help"])
+    except getopt.error, msg:
+        print msg
+        print "for help use --help"
+        sys.exit(2)
+    # process options
+    for o, a in opts:
+        if o in ("-h", "--help"):
+            print __doc__
+            sys.exit(0)
+    # open windows with pids
+    wmctrl_output = subprocess.check_output(["wmctrl", "-lp"])
+    # open programs with pid
+    ps = subprocess.check_output(["ps", "-A"])
+    program_open = False
+    program_crazy_number = ""
+    # each window
+    for line_wmc in wmctrl_output.split("\n"):
+        if len(line_wmc) == 0:
+            continue
+        split_wmc = shlex.split(line_wmc)
+        program_crazy_number = split_wmc[0]
+        pid = split_wmc[2]
+        for line_ps in ps.split("\n"):
+            if len(line_ps) == 0:
+                continue
+            split_ps = shlex.split(line_ps)
+            if (split_ps[0] == pid) & (split_ps[3] == args[0]):
+                program_open = True
+                break
+        if program_open:
+            break
+
+    if program_open:
+        # set focus to open window
+        subprocess.call(["wmctrl", "-ia", program_crazy_number])
+    else:
+        # start program
+        subprocess.Popen([args[1]], shell=True)
+
+if __name__ == "__main__":
+    main()
+

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+flacfile=$1
+mp3file=${flacfile%.flac}.mp3
+cuefile=${flacfile%.flac}.cue
+
+flac -c -d "$flacfile" | lame - "$mp3file"
+mp3splt -f -c "$cuefile" "$mp3file"
+ 

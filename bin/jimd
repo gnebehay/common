@@ -1,0 +1,4 @@
+#!/bin/bash
+
+python3 "$DROPBOX/misc/jimd/jimd.py" "$@"
+

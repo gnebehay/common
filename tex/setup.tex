@@ -1,0 +1,67 @@
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage[ngerman,american]{babel}
+\usepackage{blindtext}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usepackage{comment}
+\usepackage{eso-pic} %I think this is here for the titlepage?
+\usepackage{etex}
+\usepackage{float}
+\usepackage[T1]{fontenc}
+%\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage[space]{grffile}
+\usepackage{multirow}
+\usepackage[utf8]{inputenc}
+\usepackage{csquotes} %Wants to be loaded after inputenc
+\usepackage{longtable}
+\usepackage{nag}
+\usepackage{makecell}
+%\usepackage{placeins}
+\usepackage{subcaption}
+\usepackage{textcomp}
+\usepackage{xspace}
+%bookmarks and pagebackref options cannot be changed later, so consider setting them here
+%[bookmarks=false,pagebackref=false]
+\usepackage{hyperref} %Hyperref should go last
+
+\captionsetup{subrefformat=parens}
+
+%uncomment this to get floating algorithm environments
+\newfloat{algorithm}{t}{}
+
+%Set graphics path
+\graphicspath{{figures//}}
+
+%Use input/output instead of require/ensure
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+%Add command for providing external file dependencies to latexmk
+\makeatletter
+\newcommand*{\addFileDependency}[1]{%
+  \typeout{(#1)}%
+  \@addtofilelist{#1}%
+  \IfFileExists{#1}{}{\typeout{No file #1.}}%
+}
+\makeatother
+
+%Define simple todo command
+\newcommand{\mytodo}[1]{\notbool{hidetodos}{\textcolor{red}{\footnote{\textcolor{red}{#1}}}}{}}
+\newcommand{\mytodoinline}[1]{\notbool{hidetodos}{\textcolor{red}{\textcolor{red}{#1}}}{}}
+
+%Command to vertically center horizontal material
+\newcommand*{\vcenteredhbox}[1]{\begingroup
+\setbox0=\hbox{#1}\parbox{\wd0}{\box0}\endgroup}
+
+%Set pdf propoerties
+%\hypersetup{pdftitle={A Deformable Part Model for One-Shot Object Tracking}}
+%\hypersetup{pdfauthor={Georg Nebehay}}
+%\hypersetup{pdfproducer={\myauthor}}
+
+\newcommand{\http}[1]{http:/\kern-0.2em/#1}

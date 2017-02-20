@@ -1,0 +1,5 @@
+#!/bin/bash
+
+file=$1
+filebase=$(basename $file .pdf)
+gs -dPDFSETTINGS=/ebook -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dNOPAUSE -dQUIET -dBATCH -sOutputFile=${filebase}_opt.pdf ${filebase}.pdf 

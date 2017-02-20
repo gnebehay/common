@@ -1,0 +1,21 @@
+'.source.python':
+
+  'import pandas':
+    'prefix': 'pd'
+    'body': 'import pandas as pd'
+
+  'import numpy':
+    'prefix': 'np'
+    'body': 'import numpy as np'
+
+  'import scipy':
+    'prefix': 'sp'
+    'body': 'import scipy as sp'
+
+  'import sklearn':
+    'prefix': 'sk'
+    'body': 'import sklearn as sk'
+
+  'import matplotlib':
+    'prefix': 'plt'
+    'body': 'import matplotlib.pyplot as plt'

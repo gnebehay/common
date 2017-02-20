@@ -1,0 +1,19 @@
+\documentclass{scrartcl}
+
+\input{setup}
+\input{biblatexsetup}
+
+\usepackage{pythontex}
+
+\input{pysetup.py}
+
+\title{}
+\author{Georg Nebehay}
+
+\begin{document}
+
+\py{tpl('mytemplate.tex', foo='My content')}
+
+abc
+
+\end{document}

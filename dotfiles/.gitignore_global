@@ -1,0 +1,82 @@
+# Latex #
+#########
+*.pdf
+*.toc
+*.bbl
+*.aux
+*.out
+*.bbl
+*.blg
+*.synctex.gz
+*.fdb_latexmk
+*.log
+*.brf
+*.dvi
+*blx.bib
+*run.xml
+*.snm
+*.nav
+*.tex.orig
+*.auxlock
+*.fls
+*.bcf
+*.lot
+
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.a
+*.pyc
+*.mex*
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+Thumbs.db:encryptable
+
+# CMake #
+#########
+*.cmake
+CMakeFiles
+CMakeCache.txt
+
+# Project files #
+#################
+.cproject
+.project
+Makefile
+.pydevproject
+*.sln
+*.suo
+*.vcproj
+*.vcproj.*
+
+#Archive files
+*.zip
+*.tar.gz
+*.tar.bz
+*.tar
+
+# Temporary files #
+###################
+*.swo
+*.swp
+*~
+*.mat
+
+# Resource files #
+##################
+*.avi
+.pytxcode

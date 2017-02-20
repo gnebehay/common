@@ -1,0 +1,28 @@
+\usepackage[maxcitenames=2,
+  maxbibnames=99,
+  backend=biber,
+  natbib=true,
+  citestyle=authoryear,
+  url=false,
+  firstinits=true,
+  uniquename=init,
+  doi=false,
+isbn=false]{biblatex}
+
+\AtEveryBibitem{
+  \clearlist{address}
+  \clearfield{date}
+  \clearfield{eprint}
+  \clearlist{location}
+  \clearfield{month}
+  \clearlist{publisher}
+  \clearfield{pages}
+  \clearfield{series}
+
+  \ifentrytype{inproceedings}{
+    \clearfield{volume}
+    \clearfield{chapter}
+  }
+}
+
+\addbibresource{literature.bib}

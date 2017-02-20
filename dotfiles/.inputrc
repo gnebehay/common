@@ -1,0 +1,8 @@
+$include /etc/inputrc
+set editing-mode vi
+#"\C-n": menu-complete
+#"\C-p": menu-complete-backward
+"\C-x\C-r": re-read-init-file
+"\e[3~": delete-char
+"\e[5~": beginning-of-history
+"\e[6~": end-of-history

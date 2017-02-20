@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+
+from __future__ import print_function
+
+import argparse
+import cv2
+
+import cvgui
+
+if __name__ == '__main__':
+
+    parser = argparse.ArgumentParser(description='Get points from user.')
+    parser.add_argument('input_file')
+
+    args = vars(parser.parse_args())
+
+    input_file = args['input_file']
+
+    im = cv2.imread(input_file)
+
+    clicks = cvgui.select_pts(im)
+
+    for (x,y) in clicks:
+        print('\\node at (axis cs:{},{}) {{}};'.format(x, im.shape[0]-y))

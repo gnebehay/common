@@ -1,0 +1,78 @@
+#!/usr/bin/env python
+
+import argparse
+import urllib2
+
+abbrvs = {
+    'Advanced Video and Signal-based Surveillance': 'AVSS',
+    'Communications of the ACM': 'CACM',
+    'Computer Vision and Pattern Recognition': 'CVPR',
+    'European Conference on Computer Vision': 'ECCV',
+    'Foundations and Trends in Computer Graphics and Vision': 'FTCGV',
+    'International Conference on Computer Vision': 'ICCV',
+    'International Conference on Image and Graphics': 'ICIG',
+    'International Conference on Image Analysis and Processing': 'ICIAP',
+    'International Conference on Intelligent Robots and Systems': 'ICIRS',
+    'International Conference on Pattern Recognition': 'ICPR',
+    'International Journal of Computer Vision': 'IJCV',
+    'International Journal of Pattern Recognition and Artificial Intelligence': 'IJPRAI',
+    'International Joint Conference on Artificial Intelligence': 'IJCAI',
+    'International Conference on Acoustics, Speech and Signal Processing': 'ICASSP',
+    'Neural Information Processing Systems': 'NIPS',
+    'Transactions on Neural Networks': 'TNN',
+    'Trends in Neurosciences': 'TINS',
+    'Performance Evaluation of Tracking and Surveillance': 'PETS',
+    'Registration and Recognition in Images and Videos': 'RRIV',
+    'Pattern Analysis and Machine Intelligence': 'TPAMI',
+    'Winter Conference on Applications of Computer Vision': 'WACV'}
+
+expansions = {'Advanced Video and Signal-based Surveillance': 'International Conference on Advanced Video and Signal-based Surveillance',
+    'Computer Vision and Pattern Recognition': 'Conference on Computer Vision and Pattern Recognition',
+    'Neural Information Processing Systems': 'Conference on Neural Information Processing Systems',
+    'Performance Evaluation of Tracking and Surveillance': 'International Workshop on Performance Evaluation of Tracking and Surveillance',
+    'Pattern Analysis and Machine Intelligence': 'Transactions on Pattern Analysis and Machine Intelligence'}
+
+delete = ['editors', 'address', 'url', 'day']
+delete_short = ['month','pages','publisher']
+
+parser = argparse.ArgumentParser(description='Export citeulike bib file.')
+
+parser.add_argument('outfile', default='literature.bib', nargs='?', help='The bibfile to save to.')
+parser.add_argument('--long', dest='short', action='store_false', help='Use abbreviations.')
+parser.add_argument('--no-delete', dest='delete', action='store_false', help='Delete superfluous fields.')
+parser.add_argument('--delete-all', dest='deleteall', action='store_true', help='Delete all superfluous fields.')
+
+args = parser.parse_args()
+
+site = 'http://www.citeulike.org/bibtex/user/gnebehay'
+hdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
+       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+       'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
+       'Accept-Encoding': 'none',
+       'Accept-Language': 'en-US,en;q=0.8',
+       'Connection': 'keep-alive'}
+req = urllib2.Request(site, headers=hdr)
+response = urllib2.urlopen(req)
+html = response.read()
+
+if args.short:
+    for key in abbrvs:
+        print 'replacing {0} with {1}.'.format(key, abbrvs[key])
+        html = html.replace(key, abbrvs[key])
+else:
+    for key in expansions:
+        print 'replacing {0} with {1}.'.format(key, expansions[key])
+        html = html.replace(key, expansions[key])
+
+
+if args.delete:
+    #Remove unneccessary fields
+    print 'Remove unneccessary fields'
+    if args.short or args.deleteall:
+        delete.extend(delete_short)
+    #My favourite python line so far.
+    html = '\n'.join([line for line in html.split('\n') if all([(entry + ' = ' not in line) for entry in delete])])
+
+
+with open(args.outfile,'w') as f:
+    f.write(html)

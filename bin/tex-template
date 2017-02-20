@@ -1,0 +1,57 @@
+#!/usr/bin/env python3
+
+# PYTHON_ARGCOMPLETE_OK
+
+import argparse
+import argcomplete
+import os
+import shutil
+
+def copyIfNotExists(template, output_file=None):
+    ROOT = os.path.join(os.environ['DROPBOX'], 'common/tex')
+
+    if output_file is None:
+        output_file = template
+
+    if os.path.exists(output_file):
+        print(output_file + ' already exists, skipping')
+        return
+
+    print("Copying " + template + " to " + output_file)
+
+    shutil.copy(os.path.join(ROOT, template), output_file)
+
+if __name__ == '__main__':
+
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('template', choices=['letter', 'paper', 'presentation'])
+    parser.add_argument('name')
+
+    argcomplete.autocomplete(parser)
+    args = parser.parse_args()
+
+    main_file = args.name + '.tex'
+
+    if args.template == 'letter':
+        copyIfNotExists('sample_letter.tex', main_file)
+
+    if args.template == 'paper':
+        copyIfNotExists('sample_paper.tex', main_file)
+        copyIfNotExists('setup.tex')
+        copyIfNotExists('layout.tex')
+        copyIfNotExists('biblatexsetup.tex')
+        copyIfNotExists('mathsetup.tex')
+        copyIfNotExists('remake.tex')
+        copyIfNotExists('tikzsetup.tex')
+
+    if args.template == 'presentation':
+        copyIfNotExists('sample_presentation.tex', main_file)
+        copyIfNotExists('layout-beamer.tex')
+        copyIfNotExists('mathsetup.tex')
+        copyIfNotExists('tikzsetup.tex')
+        copyIfNotExists('setup.tex')
+
+    #Create latex main file
+    latex_main_file = main_file + '.latexmain'
+    open(latex_main_file, 'a').close()

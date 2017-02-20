@@ -1,0 +1,28 @@
+#!/usr/bin/python
+
+import os
+import os.path
+import sys
+
+def fileCount(folder):
+
+    count = 0
+
+    for filename in os.listdir(folder):
+        path = os.path.join(folder, filename)
+
+        if os.path.isfile(path):
+            count += 1
+        elif os.path.isdir(path):
+            dircount = fileCount(path)
+            print dircount, path
+            count += dircount
+
+    return count
+
+if __name__ == "__main__": 
+    start_dir = '.'
+    if len(sys.argv) > 1:
+        start_dir = sys.argv[1]
+
+    print fileCount(start_dir), start_dir

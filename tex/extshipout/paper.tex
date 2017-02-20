@@ -1,0 +1,38 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{times}
+\usepackage{cvpr}
+
+\input{setup}
+\input{remake}
+
+\usepackage{ifthen}
+
+\ifthenelse{\equal{\tikzexternalrealjob}{paper}}
+{\cvprfinalcopy}
+{}
+
+
+\hypersetup{hidelinks} %Colors all links black
+
+\def\cvprPaperID{927}
+
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+
+\ifcvprfinal\pagenumbering{gobble}\fi
+
+%\overfullrule=1mm
+
+\begin{document}
+
+Yo, \tikzexternalrealjob
+
+\begin{tikzpicture}
+  \node[draw,minimum size=5cm] {A};
+
+\end{tikzpicture}
+
+
+
+
+\end{document}

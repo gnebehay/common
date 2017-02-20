@@ -1,0 +1,18 @@
+#!/usr/bin/env python
+
+import datetime
+import subprocess
+import sys
+import traceback
+
+server = sys.argv[1]
+port = int(sys.argv[2])
+
+while True:
+	try:
+		command = 'ssh ' + server + ' -R' + str(port) + ':localhost:22'
+
+		subprocess.call(command, shell=True)
+	except:
+		print str(datetime.datetime.now())
+		print sys.exc_info()[0]

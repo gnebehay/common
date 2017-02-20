@@ -1,0 +1,77 @@
+#!/bin/bash
+
+#Add atom repository
+sudo cp webupd8-atom.list /etc/apt/sources.list.d/
+
+#Install files from apt-packages
+sudo apt-get install $(< apt-packages)
+
+#Set up sudo
+sudo cp sudoers /etc/
+
+#Set up X11
+sudo mkdir /etc/X11/xorg.conf.d
+sudo cp synaptics.conf /etc/X11/xorg.conf.d/
+
+#Set nemo as default file manager
+xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
+
+# Disable suspend on lid close
+sudo sed -i s/#HandleLidSwitch=suspend/HandleLidSwitch=ignore/ /etc/systemd/logind.conf
+
+# Enable automatic login for user georg
+if [ $USER = "georg" ]; then
+    sudo sed -i 's/#  AutomaticLoginEnable = true/AutomaticLoginEnable = true/' /etc/gdm3/daemon.conf
+    sudo sed -i 's/#  AutomaticLogin = user1/AutomaticLogin = georg/' /etc/gdm3/daemon.conf
+fi
+
+PKG_OK=$(dpkg-query -W --showformat='${Status}\n' gnome-icon-theme-gartoon-redux|grep "install ok installed")
+echo Checking for gartoon: $PKG_OK
+if [ "" == "$PKG_OK" ]; then
+    echo "No gartoon. Setting up gartoon."
+    sudo dpkg -i gnome-icon-theme-gartoon-redux_1.10-0ubuntu3_all.deb
+fi
+
+for package in autocomplete-python autocomplete-paths language-latex linter-flake8 vim-mode-plus jumpy hydrogen file-icons; do
+    if [[ ! -d "$HOME/.atom/packages/$package" ]]
+    then
+        apm install $package
+
+        if [ $package == vim-mode ]; then
+
+            echo "Patching vim mode"
+
+            patch ~/.atom/packages/vim-mode/lib/vim-state.coffee vim-state.coffee.patch
+
+        fi
+    fi
+
+done
+
+
+#Symlink dotfiles
+python link.py
+
+# Afterwards, copy the letter templates over
+cp "$DROPBOX/misc/letter_templates/*" texmf/tex/latex/myletter/
+
+cat dconf | dconf load /
+
+pip3 install --upgrade -r requirements.txt
+
+ipython3 profile create
+
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+
+cp robbyrussell.zsh-theme ~/.oh-my-zsh/themes/
+
+activate-global-python-argcomplete --user
+
+sudo chsh -s /usr/bin/zsh
+
+GNOME_VERSION=`gnome-shell --version | cut -f3 -d ' '`
+
+./shell-extension-install $GNOME_VERSION 413 #dash hotkeys
+./shell-extension-install $GNOME_VERSION 495 #top icons
+./shell-extension-install $GNOME_VERSION 545 #hide top bar
+./shell-extension-install $GNOME_VERSION 723 #pixel saver

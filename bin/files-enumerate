@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+
+import os
+import sys
+
+files = sorted(sys.argv[1:])
+
+weird_unique_string = 'ohSe9xie'
+
+i = 1
+temp_renames = []
+for f in files:
+    #Extract extension
+    _,ext = os.path.splitext(f)
+    new_name = '{0:08d}{1}{2}'.format(i,ext,weird_unique_string)
+    temp_renames.append(new_name)
+    print 'renaming',f,'to',new_name
+    os.rename(f,new_name)
+    i += 1
+
+for f in temp_renames:
+    final_name = f.replace(weird_unique_string, '')
+    os.rename(f,final_name)
+    print 'renaming',f,'to',final_name

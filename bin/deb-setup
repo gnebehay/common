@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd ~/Dropbox/common/dotfiles
+./install
+cd -

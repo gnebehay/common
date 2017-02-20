@@ -1,0 +1,15 @@
+#!/usr/bin/env python
+import shutil
+import os
+import subprocess
+
+#Recreate ext directory
+shutil.rmtree('ext')
+os.mkdir('ext')
+
+#Recreate compiled directory
+shutil.rmtree('compiled')
+os.mkdir('compiled')
+
+#TODO: Would be nicer to just call a python function here
+subprocess.call('tex-touch')

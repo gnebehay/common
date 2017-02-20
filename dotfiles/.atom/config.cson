@@ -1,0 +1,57 @@
+"*":
+  Hydrogen:
+    startupCode: "{\"Python 3\": \"%matplotlib inline\"}"
+  "autocomplete-plus":
+    useCoreMovementCommands: false
+  "autocomplete-python":
+    pythonPaths: "/usr/bin/python3"
+    suggestionPriority: 1
+    useSnippets: "required"
+  "bracket-matcher":
+    autocompleteBrackets: false
+    autocompleteSmartQuotes: false
+  core:
+    autoHideMenuBar: true
+    telemetryConsent: "limited"
+    themes: [
+      "atom-dark-ui"
+      "atom-dark-syntax"
+    ]
+  editor:
+    lineHeight: 1.2
+    preferredLineLength: 100
+  "exception-reporting":
+    userId: "2e2ea295-a6ba-aca6-c132-defba700ff58"
+  linter:
+    errorPanelHeight: 171
+    showErrorPanel: false
+  "linter-flake8":
+    flakeErrors: true
+    ignoreErrorCodes: [
+      "E303"
+      "E261"
+      "E302"
+      "E701"
+      "E226"
+    ]
+    maxLineLength: 100
+    pep8ErrorsToWarnings: true
+  minimap:
+    absoluteMode: true
+  "vim-mode":
+    useSmartcaseForSearch: true
+  "vim-mode-plus":
+    flashOnOperate: false
+    flashOnSearch: false
+    flashOnUndoRedo: false
+    flashScreenOnSearchHasNoMatch: false
+    groupChangesWhenLeavingInsertMode: false
+    useClipboardAsDefaultRegister: true
+    useSmartcaseForSearch: true
+  "vim-surround":
+    surroundCommand: "S"
+  welcome:
+    showOnStartup: false
+".breakpoints.hydrogen":
+  editor:
+    preferredLineLength: 100

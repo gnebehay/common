@@ -1,0 +1,21 @@
+#!/usr/bin/env python
+
+from __future__ import print_function
+
+import subprocess
+import texcommon
+
+if __name__ == '__main__':
+
+    main_file = texcommon.getLatexMain('.')
+
+    if main_file is not None:
+        print('spawning latexmk instance')
+        subprocess.Popen('latexmk -pvc ' + main_file, shell=True)
+
+    else:
+        print('Error: No .latexmain file was found')
+
+
+
+

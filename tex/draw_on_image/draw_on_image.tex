@@ -1,0 +1,17 @@
+\documentclass{article}
+
+\input{setup}
+
+\begin{document}
+
+\begin{tikzpicture}
+\pgfplotsset{image/.style={enlargelimits=false,axis lines=none,ticks=none,axis equal image}}
+    \begin{axis}[width=.5\linewidth,image]
+			\addplot graphics[xmin=0,ymin=0,xmax=1,ymax=1] {david};
+  \end{axis}
+\end{tikzpicture}
+
+\includegraphics[width=.5\linewidth]{david}
+
+
+\end{document}

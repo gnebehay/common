@@ -1,0 +1,88 @@
+#!/usr/bin/env python
+
+from __future__ import print_function
+
+import argparse
+import cv2
+import cvtrack
+import cvseq
+import cvutil
+import numpy as np
+import os
+import sys
+
+if __name__ == '__main__':
+
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('tracker')
+    parser.add_argument('sequence')
+    parser.add_argument('--visualize', action='store_true', help='Visualize tracker run.')
+
+    args = parser.parse_args()
+
+    seqs = cvseq.load_sequences()
+
+    trackers = cvtrack.load_trackers()
+
+    #Find tracker
+    if not args.tracker in trackers.keys():
+        print('Tracker not found')
+        sys.exit(1)
+
+    t = trackers[args.tracker]
+
+    additional_args = ' '.join(sys.argv[5:])
+    seq = seqs[args.sequence]
+    results, elapse_time = t.run(seq, additional_args)
+
+    print('Tracker run took ',elapse_time, ' seconds')
+
+    frame = 0
+    num_frames = seq.num_frames
+    if args.visualize:
+
+        colors = [(0,255,0),(255,0,0)] #gt,tracker
+
+        while True:
+            print('frame', frame)
+            im_path = seq.im_list[frame]
+            if not os.path.exists(im_path):
+                raise Exception(im_path + ' does not exist')
+            im = cv2.imread(im_path)
+
+            bboxes = (seq.gt, results)
+
+            for bbox, color in zip(bboxes, colors):
+
+                gt_frame = bbox[frame]
+                if not np.any(np.isnan(gt_frame)):
+                    tl = cvutil.array_to_int_tuple(gt_frame[:2])
+                    br = cvutil.array_to_int_tuple(gt_frame[:2] + gt_frame[2:4])
+                    cv2.rectangle(im, tl, br, color, thickness=4)
+
+            win_name = args.tracker
+            cv2.imshow(win_name, im)
+            key = cv2.waitKey(0)
+            key = chr(key & 255)
+
+            if key == 'q':
+                break
+            elif key == 'Q':
+                frame -= 2 #Go back one frame
+            elif key == 'P':
+                frame = -1
+            elif key == 'W':
+                frame = num_frames
+            elif key == 'm':
+                frame = num_frames / 2
+            elif key == 'V':
+                frame += num_frames / 100
+            elif key == 'U':
+                frame -= num_frames / 100
+
+            frame += 1
+
+            #Don't go out of bounds
+            frame = max(frame, 0)
+            frame = min(frame, num_frames-1)

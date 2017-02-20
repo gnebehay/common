@@ -1,0 +1,23 @@
+\documentclass{scrartcl}
+
+\input{setup}
+
+\let\oldjobname\jobname
+
+\def\jobname{paper}
+
+\usepackage{pythontex}
+
+\let\jobname\oldjobname
+
+%\tikzexternaldisable
+
+\begin{document}
+
+  \begin{pycode}
+print('\\begin{tikzpicture}')
+print('\\node {A};')
+print('\\end{tikzpicture}')
+  \end{pycode}
+
+\end{document}

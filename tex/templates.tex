@@ -1,0 +1,28 @@
+%Success plot
+\tikzstyle{successplot}={mark=none, ultra thick]
+\begin{axis}[
+  ymax=1,
+  enlargelimits=false,
+  font=\scriptsize,
+  cycle list name = exotic]
+  \addplot+[successplot] table[col sep=comma] {tracker1result.txt};
+  ...
+  \addplot+[successplot] table[col sep=comma] {tracker2result.txt};
+  \addlegendentry{tracker1}
+  ...
+  \addlegendentry{trackerN}
+\end{axis}
+
+%Group plot
+\begin{groupplot}
+  [group style={group size=m by n,horizontal sep=0cm,vertical sep=0cm},
+  width=w,
+  axis lines=none,
+  enlargelimits=false,
+  ticks=none,
+  scale only axis,
+  axis equal image]
+  \nextgroupplot \addplot graphics[xmin=0,ymin=0,xmax=w,ymax=h] {im1};
+  ...
+  \nextgroupplot \addplot graphics[xmin=0,ymin=0,xmax=w,ymax=h] {imN};
+\end{groupplot}

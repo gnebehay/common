@@ -1,0 +1,25 @@
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+
+\tikzstyle{component}=[rectangle, draw=black, rounded corners, fill=blue!40, drop shadow, text centered, anchor=north, text=white, minimum height=1cm]
+
+%tikz setup
+\usetikzlibrary{arrows,backgrounds,calc,external,fit,positioning,shapes,shadows}
+\usetikzlibrary{pgfplots.groupplots}
+\tikzexternalize[prefix=ext/]
+
+%Pagella has no slanted fonts, so substitute the missing characters with italics
+%\DeclareFontShape{T1}{qpl}{m}{sl} { <-> ssub * qpl/m/it }{}
+%\DeclareFontShape{T1}{qpl}{b}{sl} { <-> ssub * qpl/b/it }{}
+
+
+%These can come in handy sometimes
+%\tikzset{external/remake next}
+%\tikzset{external/export next=false}
+
+%pgfplots setup
+\pgfplotsset{compat=1.11}
+\pgfplotsset{filter discard warning=false}
+%axis style for plotting images
+\pgfplotsset{image/.style={enlargelimits=false,axis lines=none,ticks=none,scale only axis,axis equal image}}

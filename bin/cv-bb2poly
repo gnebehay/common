@@ -1,0 +1,14 @@
+#!/usr/bin/env python
+
+import bb
+import sys
+
+if len(sys.argv) < 3:
+	output = 'groundtruth.txt'
+else:
+	output = sys.argv[2]
+
+bbs = bb.read(sys.argv[1])
+pts = bb.bb2pts(bbs)
+poly = bb.pts2poly(pts)
+bb.write(output,poly)

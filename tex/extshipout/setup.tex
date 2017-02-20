@@ -1,0 +1,365 @@
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{blindtext}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usepackage{comment}
+\usepackage{etex}
+\usepackage{float}
+%\usepackage{flafter}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage[space]{grffile}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+\usepackage{nag}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{standalone}
+\usepackage{tikz}
+\usepackage{todonotes}
+\usepackage{xspace}
+\usepackage[bookmarks=false,pagebackref=false]{hyperref} %Hyperref should go last
+
+%float setup
+\newfloat{algorithm}{t}{}
+
+%Set graphics path
+\graphicspath{{figures//}}
+
+%hyperref setup
+\hypersetup{breaklinks=true}
+\hypersetup{colorlinks=true}
+\hypersetup{draft=false}
+\hypersetup{linktoc=all}
+\hypersetup{urlcolor=blue}
+
+\urlstyle{rm}
+
+%tikz setup
+\usetikzlibrary{arrows,backgrounds,calc,external,fit,shapes}
+\usetikzlibrary{pgfplots.groupplots}
+
+\tikzstyle{bbox}=[draw,blue,thick,inner sep=0]
+\tikzstyle{arrow}=[-latex]
+
+\tikzstyle{component}=[draw,rounded corners, minimum size=0.5cm]
+\tikzstyle{componentedge}=[bend left=40]
+\tikzstyle{componentpath}=[-latex]
+\tikzstyle{vote}=[draw,thick,-latex]
+\tikzstyle{part}=[circle,draw,fill=white,minimum size=0.2cm,inner sep=0]
+\tikzstyle{correctMatch}=[part,fill=green]
+\tikzstyle{wrongMatch}=[part,fill=red]
+\tikzstyle{candidate}=[part,fill=white]
+\tikzstyle{uncertainty}=[circle,fill=lightgray,minimum size=1cm,inner sep=0]
+\tikzstyle{centerPoint}=[draw,fill=white]
+\tikzstyle{keypoint}=[draw, fill=white,circle,inner sep=0,minimum size=0.10cm]
+
+\tikzexternalize[prefix=ext/]
+%\tikzexternaldisable
+
+\pgfplotsset{compat=1.7}
+\pgfplotsset{filter discard warning=false}
+\pgfplotsset{major grid style={dotted}}
+
+%Set graphics path
+\graphicspath{{figures//}}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+%Make require and ensure input and output
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+%This can be used to add external file dependencies for latexmk
+\makeatletter
+\newcommand*{\addFileDependency}[1]{% argument=file name and extension
+  \typeout{(#1)}% latexmk will find this if $recorder=0 (however, in that case, it will ignore #1 if it is a .aux or .pdf file etc and it exists! if it doesn't exist, it will appear in the list of dependents regardless)
+  \@addtofilelist{#1}% if you want it to appear in \listfiles, not really necessary and latexmk doesn't use this
+  \IfFileExists{#1}{}{\typeout{No file #1.}}% latexmk will find this message if #1 doesn't exist (yet)
+}
+\makeatother
+
+\newcommand{\mytodo}[1]{\textcolor{red}{#1}}
+%\newcommand{\mytodo}[1]{}
+\newcommand{\imagepath}[0]{figures/results/}
+\newcommand{\qualOutputX}[4]{
+	\begin{tikzpicture}[scale=1, transform shape]%
+      \clip(1,0) rectangle (2,2);
+  \begin{axis}[clip marker paths=true, enlargelimits=false, ticks=none, axis equal image, width=5.05cm]%
+    \addplot graphics[xmin=0,ymin=0,xmax=#2,ymax=#3] {\imagepath/#1/input_#4.png};%
+    \addplot [mark=*,mark size=1,only marks, black,fill=white] table [x=x, y expr=#3-\thisrow{y}] {\imagepath/#1/keypoints_#4.csv};%
+%    \addplot [mark=*,mark size=1,only marks, fill=red] table [x=x, y expr=#3-\thisrow{y}] {\imagepath/#1/outliers_#4.csv};%
+%    \addplot [thick, mark=none, blue] table [x=x, y expr=#3-\thisrow{y}] {\imagepath/#1/bbox_#4.csv};%
+  \end{axis}%
+\end{tikzpicture}%
+}
+\newcommand{\qualOutput}[4]{
+\begin{tikzpicture}%
+  \begin{axis}[clip marker paths=true, enlargelimits=false, ticks=none, axis equal image, width=4.00cm]%
+    \addplot graphics[xmin=0,ymin=0,xmax=#2,ymax=#3] {\imagepath/#1/input_#4.png};%
+%    \addplot [mark=*,mark size=1,only marks, fill=white] table [x=x, y expr=#3-\thisrow{y}] {\imagepath/#1/keypoints_#4.csv};%
+%    \addplot [mark=*,mark size=1,only marks, fill=red] table [x=x, y expr=#3-\thisrow{y}] {\imagepath/#1/outliers_#4.csv};%
+    \addplot [thick, mark=none, blue] table [x=x, y expr=#3-\thisrow{y}] {\imagepath/#1/bbox_#4.csv};%
+  \end{axis}%
+\end{tikzpicture}%
+}
+\newcommand{\qualOutputBatch}[6]{%
+  \qualOutput{#1}{#2}{#3}{#4}%
+	%\hspace{0.2cm}
+  \qualOutput{#1}{#2}{#3}{#5}%
+	%\hspace{0.2cm}
+  \qualOutput{#1}{#2}{#3}{#6}%
+}
+
+\tikzstyle{successplotOld}=[mark repeat = 3]
+
+%\newcommand\successplotOld[1]{%
+%\begin{tikzpicture}%
+%\begin{axis}[xlabel=Required recall,
+%    width=6cm,
+%ylabel=Success rate,
+%grid=major,
+%enlargelimits=false,
+%yticklabel={\pgfmathprintnumber\tick\%},
+%font=\scriptsize]
+%%legend style={anchor=north west}]%
+%%plot data and legend are generated
+%\input{#1}
+%\end{axis}%
+%\end{tikzpicture}%
+%}
+
+\newcommand\successplotDetdesc[1]{%
+\begin{tikzpicture}%
+\begin{axis}[xlabel=Average overlap,
+    width=\linewidth,
+    cycle multi list={
+      solid,dotted\nextlist
+      mark=square*,mark=triangle*,mark=otimes*,mark=diamond*\nextlist
+      blue,red,orange,green,black\nextlist
+    },
+ylabel=Success rate,
+%grid=major,
+%legend columns=-1,%hide for the moment
+enlargelimits=false,
+yticklabel={\pgfmathprintnumber\tick\%},
+font=\scriptsize,
+legend columns=2,
+legend style={anchor=north east}]%
+%plot data and legend are generated
+\input{#1}
+\end{axis}%
+\end{tikzpicture}%
+}
+
+\newcommand\successplotConsensus[1]{%
+\begin{tikzpicture}%
+\begin{axis}[xlabel=Recall,
+    width=5.1cm,
+%ylabel=Success rate,
+grid=major,
+enlargelimits=false,
+%yticklabels={\pgfmathprintnumber\tick\},
+yticklabels={,,},
+font=\scriptsize,
+	legend columns=-1,
+	legend entries={RANSAC, Hough, FPM},
+	legend to name=named]
+%legend style={anchor=north west}]%
+%plot data and legend are generated
+\input{#1}
+\end{axis}%
+\end{tikzpicture}%
+}
+
+\newcommand{\drawPart}[2]{
+\node[part] (#1) at (#2) {};
+}
+
+\newcommand{\drawUncertainPart}[2]{
+	\node[uncertainty] at (#2) {};
+	\node[part] (#1) at (#2) {};
+}
+
+
+\newcommand{\drawLocalPart}[2]{
+\node[part,fill=blue] (#1) at ($(center)+(#2)$) {};
+}
+
+\newcommand\dissimilarity{D}
+\newcommand\match{m}
+\newcommand\matches{\mathcal{L}}
+\newcommand\matchesCurrent{\matches_\iteration}
+\newcommand\matchesPrevious{\matches_{\iteration-1}}
+\newcommand\matchesAdaptive{\matchesCurrent^\ast}
+\newcommand\matchesInlier{\matchesCurrent^+}
+\newcommand\matchesOutlier{\matchesCurrent^-}
+\newcommand\transform{H}
+%\newcommand\transformInv{\transform^{-1}}
+\newcommand\pointInitial{\point^0}
+\newcommand\pointCurrent{\point^\iteration}
+\newcommand\points{P}
+\newcommand\pointsInitial{\points_0}
+\newcommand\pointsCurrent{\points_\iteration}
+\newcommand\numPoints{n}
+
+%% better: (general command to vertically center horizontal material)
+\newcommand*{\vcenteredhbox}[1]{\begingroup
+\setbox0=\hbox{#1}\parbox{\wd0}{\box0}\endgroup}
+
+\newcommand{\atan}{\textnormal{atan2}}
+\newcommand{\median}{\textnormal{med}}
+
+\newcommand{\iteration}{t}
+\newcommand{\numParts}{N}
+\newcommand{\modelPart}{p}
+\newcommand{\model}{P}
+
+\newcommand{\TP}{TP}
+\newcommand{\FN}{FN}
+
+\newcommand\interestPoint{c}
+\newcommand\candidateKeypoints{C}
+
+\newcommand{\numEstimates}{M}
+\newcommand{\estimate}{\hat \modelPart}
+\newcommand{\estimates}{\hat \model}
+\newcommand{\estimatesTracked}{\hat \model^T}
+\newcommand{\estimatesInitial}{D_0}
+\newcommand{\estimatesFinal}{\hat \model^F}
+
+\newcommand{\numInliers}{M^+}
+
+\newcommand{\point}{x}
+\newcommand{\scale}{s}
+\newcommand{\scaleGT}{s_{GT}}
+\newcommand{\rotationMatrix}{R}
+\newcommand{\rotation}{\alpha}
+
+\newcommand{\one}{a}
+\newcommand{\two}{b}
+
+\newcommand{\substitute}{q}
+\newcommand{\residual}{\eta}
+
+\newcommand{\noise}{\eta}
+
+\newcommand{\modelIndex}{\pi}
+
+\newcommand{\constellation}{H}
+
+\newcommand{\consensus}{\omega}
+\newcommand\cluster{C}
+\newcommand{\consensusSet}{\cluster}
+\newcommand{\valid}{\phi}
+\newcommand{\bbox}{b}
+
+\newcommand{\minimumSize}{\theta}
+
+\newcommand{\overlap}{\phi}
+\newcommand\modelDescriptors{F}
+\newcommand\descriptor{f}
+
+\newcommand\numCandidates{{\numKeypoints_\candidateKeypoints}}
+
+\newcommand\matchThreshold{\theta}
+\newcommand\matchRatio{\gamma}
+
+\newcommand{\numSequences}{20\xspace}
+\newcommand{\numSequencesOverall}{60\xspace}
+
+\newcommand{\backgroundDescriptors}{\model^-}
+\newcommand{\consensusCluster}{\votes^c}
+\newcommand{\dimensionality}{d}
+\newcommand{\distance}{d}
+\newcommand{\distribution}{D}
+\newcommand{\descriptorModel}{f}
+\newcommand{\vote}{h}
+\newcommand{\keypoint}{k}
+\newcommand{\image}{I}
+\newcommand{\keypoints}{K}
+\newcommand{\keypointsCombined}{K'}
+\newcommand{\modelKeypoint}{g}
+\newcommand\numKeypoints{N}
+\newcommand\numKeypointsModel{\numKeypoints_\model}
+\newcommand\numKeypointsCombined{\numKeypoints_{\keypointsCombined}}
+\newcommand\numKeypointsIteration{\numKeypoints_{\keypoints_\iteration}}
+\newcommand{\numClusters}{m}
+\newcommand{\keypointsMatched}{M}
+\newcommand{\numImages}{n}
+\newcommand{\objCenter}{\mu}
+\newcommand{\keypointsTracked}{T}
+\newcommand{\votes}{V}
+\newcommand{\cutoffThr}{\delta}
+\newcommand{\minKeypoints}{\theta}
+
+\newcommand{\scaleHistGroup}[3]{
+        \nextgroupplot
+        \addplot+[black,draw=none,ybar,ybar interval,fill=black,mark=none] table {data/hist_#1.txt};
+		\addplot+[blue,mark=none] plot coordinates {(0,0)} ;
+		\addplot+[green,dashed,mark=none] plot coordinates {(0,0)} ;
+		\draw[blue] ({axis cs:#2,0}|-{rel axis cs:0,0}) -- ({axis cs:#2,0}|-{rel axis cs:0,1});
+		\draw[green,dashed] ({axis cs:#3,0}|-{rel axis cs:0,0}) -- ({axis cs:#3,0}|-{rel axis cs:0,1});
+}
+
+\newcommand{\scaleHist}[3]{
+\begin{tikzpicture}
+	\begin{axis}[width=3cm,%yticklabels={,,},
+legend columns=-1,
+legend entries={$S$,median,GT},
+legend to name=mylegend,
+tick label style={font=\scriptsize},
+label style={font=\scriptsize},
+y tick label style={/pgf/number format/.cd,sci,precision=0}
+]
+		\addplot+[black,draw=none,ybar,ybar interval,fill=black,mark=none] table {data/hist_#1.txt};
+		\addplot+[blue,mark=none] plot coordinates {(0,0)} ;
+		\addplot+[green,dashed,mark=none] plot coordinates {(0,0)} ;
+		\draw[blue] ({axis cs:#2,0}|-{rel axis cs:0,0}) -- ({axis cs:#2,0}|-{rel axis cs:0,1});
+		\draw[green,dashed] ({axis cs:#3,0}|-{rel axis cs:0,0}) -- ({axis cs:#3,0}|-{rel axis cs:0,1});
+%		\addlegendentry{HIST}%
+%		\addlegendentry{median}%
+%		\addlegendentry{GT}%
+	\end{axis}
+\end{tikzpicture}
+}
+
+\tikzstyle{successplot}=[mark=none, ultra thick]
+
+\newcommand{\successplot}[5]{%
+\begin{tikzpicture}
+  \begin{axis}[ymax=1,enlargelimits=false,font=\scriptsize,cycle multi list={solid,dashed\nextlist teal,orange,red!70!white,lime!80!black,blue!60!white,gray,pink}, width=.5\linewidth,
+    title=#1,
+    xlabel=#2,
+    ylabel=#3]
+    \input{#4}
+    \input{#5}
+  \end{axis}
+\end{tikzpicture}%
+}
+
+%This is just for qualitative output
+\newlength{\quallength}
+\setlength{\quallength}{5.5cm}
+\newcommand{\imagepathZ}[0]{figures/qualresults/}
+\newcommand{\qualOutputZ}[4]{
+\begin{tikzpicture}%
+  \begin{axis}[clip marker paths=true, enlargelimits=false, ticks=none, axis equal image, width=\quallength]%
+    \addplot graphics[xmin=0,ymin=0,xmax=#2,ymax=#3] {\imagepathZ/#1/input_#4.png};%
+    \addplot [mark=*,mark size=1,only marks, fill=white] table [x=x, y expr=#3-\thisrow{y}] {\imagepathZ/#1/keypoints_#4.csv};%
+    \addplot [mark=*,mark size=1,only marks, fill=red] table [x=x, y expr=#3-\thisrow{y}] {\imagepathZ/#1/outliers_#4.csv};%
+    \addplot [thick, mark=none, blue] table [x=x, y expr=#3-\thisrow{y}] {\imagepathZ/#1/bbox_#4.csv};%
+  \end{axis}%
+\end{tikzpicture}%
+}
+\newcommand{\qualOutputBatchZ}[7]{%
+  \qualOutputZ{#1}{#2}{#3}{#4}%
+  \qualOutputZ{#1}{#2}{#3}{#5}%
+  \qualOutputZ{#1}{#2}{#3}{#6}%
+  \qualOutputZ{#1}{#2}{#3}{#7}%
+}

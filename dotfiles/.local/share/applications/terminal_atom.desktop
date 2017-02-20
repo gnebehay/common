@@ -1,0 +1,6 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Atom in Terminal
+Exec=bash -l -c atom
+Icon=atom
+Type=Application

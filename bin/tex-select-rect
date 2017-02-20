@@ -1,0 +1,25 @@
+#!/usr/bin/env python
+
+from __future__ import print_function
+from __future__ import division
+
+import argparse
+import cv2
+import cvgui
+
+if __name__ == '__main__':
+
+    parser = argparse.ArgumentParser(description='Get rectangle from user.')
+    parser.add_argument('input_file')
+
+    args = vars(parser.parse_args())
+
+    input_file = args['input_file']
+
+    im = cv2.imread(input_file)
+
+    (tl,br) = cvgui.get_rect(im)
+
+    h = im.shape[0]
+
+    print('\\draw (axis cs:{},{}) rectangle (axis cs:{},{});'.format(tl[0],h-tl[1],br[0],h-br[1]))

@@ -1,0 +1,39 @@
+'atom-text-editor.vim-mode-plus:not(.insert-mode)':
+  'shift-Y': 'vim-mode-plus:yank-to-last-character-of-line'
+  '^': 'vim-mode-plus:move-to-beginning-of-line'
+  '0': 'vim-mode-plus:move-to-first-character-of-line'
+
+'atom-text-editor.vim-mode-plus.normal-mode':
+  'y s': 'vim-mode-plus:surround'
+  'y s w': 'vim-mode-plus:surround-word'
+
+  'd s': 'vim-mode-plus:delete-surround'
+  'd s': 'vim-mode-plus:delete-surround-any-pair'
+  'd s': 'vim-mode-plus:delete-surround-any-pair-allow-forwarding'
+
+  'c s': 'vim-mode-plus:change-surround'
+  'c s': 'vim-mode-plus:change-surround-any-pair'
+  'c s': 'vim-mode-plus:change-surround-any-pair-allow-forwarding'
+
+  'y m s':  'vim-mode-plus:map-surround'
+
+'body atom-text-editor.autocomplete-active':
+  'ctrl-p': 'autocomplete-plus:move-up'
+  'up': 'autocomplete-plus:move-up'
+  'ctrl-n': 'autocomplete-plus:move-down'
+  'down': 'autocomplete-plus:move-down'
+  'pageup': 'autocomplete-plus:page-up'
+  'pagedown': 'autocomplete-plus:page-down'
+  'home': 'autocomplete-plus:move-to-top'
+  'end': 'autocomplete-plus:move-to-bottom'
+
+'.fuzzy-finder atom-text-editor[mini]':
+  'ctrl-v': 'pane:split-right'
+  'ctrl-s': 'pane:split-down'
+
+'body':
+  'ctrl-q': 'unset!'
+
+'atom-workspace atom-text-editor:not([mini])':
+  'ctrl-down': 'unset!'
+  'ctrl-up': 'unset!'

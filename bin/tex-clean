@@ -1,0 +1,3 @@
+#!/bin/bash
+
+rm -rf *.aux *.auxlock *.bbl *.blg *.brf *.fdb_latexmk *.log *-blx.bib *.nav *.out *.run.xml *.snm *.toc *.pgf-plot.table *.pgf-plot.gnuplot *.fls *.lot *.bcf *.pytxcode pythontex-files*

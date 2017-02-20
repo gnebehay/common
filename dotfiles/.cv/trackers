@@ -1,0 +1,38 @@
+{
+    "CompressiveTracking": {
+        "command": "/home/georg/Custom/CT/ct --challenge"
+    },
+    "CppMT": {
+        "command": "/home/georg/Custom/CppMT/cmt --challenge"
+    },
+    "DSST": {
+        "command": "/home/georg/Programs/matlab/bin/matlab -nodesktop -nosplash -r \"addpath('/home/georg/Custom/DSST'),wrapper\""
+    },
+    "FragTrack": {
+        "command": "/home/georg/Custom/FragTrack/FragTrack --challenge"
+    },
+    "HoughTrack": {
+        "command": "/home/georg/Custom/HoughTrack/Track --challenge"
+    },
+    "LearnMatch": {
+        "command": "/home/georg/Custom/LearnMatch/learnmatch --challenge"
+    },
+    "SCM": {
+        "command": "/home/georg/Programs/matlab/bin/matlab -nodesktop -nosplash -r scm_challenge"
+    },
+    "SIR-PF": {
+        "command": "/home/georg/Programs/matlab/bin/matlab -nodesktop -nosplash -r \"addpath('/home/georg/Custom/SIR-PF'),wrapper\""
+    },
+    "qwsEDFT": {
+        "command": "/home/georg/Programs/matlab/bin/matlab -nosplash -r \"addpath('/home/georg/Custom/qwsEDFT'),wrapper\"",
+        "protocol": "POLY"
+    },
+    "STRUCK": {
+        "command": "/home/georg/Custom/struck/STRUCK /home/georg/Dropbox/cv/VOTR/STRUCK/config.txt --challenge"
+    },
+    "TLD": {
+        "command": "/home/georg/Programs/matlab/bin/matlab -nodesktop -nosplash -r tld_challenge",
+        "blacklist": ["Cehovin.bicycle", "Kalal.panda", "Kalal.pedestrian3", "Kalal.pedestrian4", "Kalal.motocross", "Kalal.volkswagen", "Unknown.david outdoor"]
+    }
+}
+

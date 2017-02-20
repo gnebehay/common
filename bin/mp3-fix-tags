@@ -1,0 +1,60 @@
+#!/usr/bin/env python
+
+from __future__ import print_function
+
+import argparse
+import mutagen
+from mutagen.easyid3 import EasyID3
+
+from parse import *
+
+from os import listdir
+from os.path import isdir
+from os.path import join
+from os.path import normpath
+from os.path import basename
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Fix id3 tags')
+
+    parser.add_argument('folder')
+
+    args = parser.parse_args()
+
+    artist = basename(normpath(args.folder))
+
+    print('artist', artist)
+
+    for d in listdir(args.folder):
+
+        album_dir = join(args.folder, d)
+
+        if isdir(album_dir):
+
+            year, album = parse('{} - {}', d)
+
+            print('year', year)
+            print('album', album)
+
+            for f in listdir(album_dir):
+
+                if f.endswith('mp3'):
+                    print('file', f)
+                    track, title = parse('{} - {}.mp3', f)
+                    print('track', track)
+                    print('title', title)
+
+                    fullfile = join(album_dir, f)
+
+                    try:
+                        audio = EasyID3(fullfile)
+                    except mutagen.id3.ID3NoHeaderError:
+                        audio = mutagen.File(fullfile, easy=True)
+                        audio.add_tags()
+
+                    audio['artist'] = unicode(artist, 'utf-8')
+                    audio['album'] = unicode(album, 'utf-8')
+                    audio['date'] = unicode(year, 'utf-8')
+                    audio['tracknumber'] = unicode(track, 'utf-8')
+                    audio["title"] = unicode(title, 'utf-8')
+                    audio.save()

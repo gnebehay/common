@@ -1,0 +1,77 @@
+\documentclass{article}
+
+\input{setup}
+\usepackage{fullpage}
+
+\newlength{\mylength}
+\setlength{\mylength}{3cm}
+
+\begin{document}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\mylength]{david}%
+    \includegraphics[width=\mylength]{david}\\
+    \includegraphics[width=\mylength]{david}%
+    \includegraphics[width=\mylength]{david}\\
+    \caption{Image inclusion using includegraphics.}
+\end{figure}
+
+\begin{table}
+    \centering
+    \begin{tabular}{rl}
+    \begin{tikzpicture}
+        \begin{axis}[width=\mylength,axis lines=none,enlargelimits=false,ticks=none,scale only axis,axis equal image]
+            \addplot graphics[xmin=0,ymin=0,xmax=320,ymax=240] {david};
+        \end{axis}
+    \end{tikzpicture} %
+    & %
+    \begin{tikzpicture}
+        \begin{axis}[width=\mylength,axis lines=none,enlargelimits=false,ticks=none,scale only axis,axis equal image]
+            \addplot graphics[xmin=0,ymin=0,xmax=320,ymax=240] {david};
+        \end{axis}
+    \end{tikzpicture}\\
+    \begin{tikzpicture}
+        \begin{axis}[width=\mylength,axis lines=none,enlargelimits=false,ticks=none,scale only axis,axis equal image]
+            \addplot graphics[xmin=0,ymin=0,xmax=320,ymax=240] {david};
+        \end{axis}
+    \end{tikzpicture}%
+    & %
+    \begin{tikzpicture}
+        \begin{axis}[width=\mylength,axis lines=none,enlargelimits=false,ticks=none,scale only axis,axis equal image]
+            \addplot graphics[xmin=0,ymin=0,xmax=320,ymax=240] {david};
+        \end{axis}
+    \end{tikzpicture}\\
+    \end{tabular}
+    \caption{Image inclusion using addplot graphics in a table.}
+\end{table}
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+        \begin{groupplot}[group style={group size=2 by 2,horizontal sep=0cm,vertical sep=0cm},
+                width=\mylength,axis lines=none,enlargelimits=false,ticks=none,scale only axis,axis equal image]
+                \nextgroupplot \addplot graphics[xmin=0,ymin=0,xmax=320,ymax=240] {david};
+                \nextgroupplot \addplot graphics[xmin=0,ymin=0,xmax=320,ymax=240] {david};
+                \nextgroupplot \addplot graphics[xmin=0,ymin=0,xmax=320,ymax=240] {david};
+                \nextgroupplot \addplot graphics[xmin=0,ymin=0,xmax=320,ymax=240] {david};
+                \nextgroupplot \addplot graphics[xmin=0,ymin=0,xmax=320,ymax=240] {david};
+                \nextgroupplot \addplot graphics[xmin=0,ymin=0,xmax=320,ymax=240] {david};
+            \end{groupplot}
+        \end{tikzpicture}
+        \caption{Image inclusion using group plots.}
+    \end{figure}
+
+    Open Questions:
+    \begin{itemize}
+        \item How can one tell pgfplots to employ the image dimensions for xmax/ymax?
+        \item How can white space be prevented after a linebreak?
+        \item How to best organize compound tikz images?
+            I would like for instance to instantiate a basic image and then start drawing on it.
+            Currently this is being done with newcommand stupidness.
+        \item How can I typeset a backslash
+        \item Does it make sense to create a latex preprocessor like jade templates, but specifiic for latex?
+            
+    \end{itemize}
+
+    \end{document}

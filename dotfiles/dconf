@@ -1,0 +1,43 @@
+[org/gnome/desktop/media-handling]
+automount=false
+
+[org/gnome/desktop/peripherals/touchpad]
+tap-to-click=true
+
+[org/gnome/settings-daemon/plugins/mouse]
+active=false
+
+[org/gnome/settings-daemon/plugins/xsettings]
+antialiasing='grayscale'
+hinting='slight'
+
+[org/gnome/shell]
+enabled-extensions=['pixel-saver@deadalnix.me', 'hidetopbar@mathieu.bidon.ca', 'unitylike-hotkey@webgyerek.net', 'topIcons@adel.gadllah@gmail.com']
+favorite-apps=['org.gnome.Terminal.desktop', 'google-chrome.desktop', 'terminal_atom.desktop', 'nemo.desktop']
+
+[org/gnome/shell/extensions/hidetopbar]
+hot-corner=true
+mouse-sensitive=true
+
+[org/gnome/desktop/background]
+show-desktop-icons=false
+
+[org/nemo/desktop/background]
+show-desktop-icons=true
+
+[org/gnome/desktop/input-sources]
+sources=[('xkb', 'us'), ('xkb', 'at+nodeadkeys')]
+
+[org/gnome/desktop/interface]
+clock-show-date=true
+clock-show-seconds=true
+icon-theme='GartoonRedux'
+
+[org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+background-color='rgb(0,0,0)'
+use-theme-colors=false
+foreground-color='rgb(255,255,255)'
+scrollback-unlimited=true
+
+[org/gnome/terminal/legacy]
+default-show-menubar=false

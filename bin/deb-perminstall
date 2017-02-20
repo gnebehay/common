@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+
+import subprocess
+import os
+import sys
+
+print
+
+if __name__ == '__main__':
+
+    PKG_FILE = os.path.join(os.environ['DROPBOX'], 'common/dotfiles/apt-packages')
+
+    package = sys.argv[1]
+
+    #Try to install package
+    return_code = subprocess.call('sudo apt-get install {}'.format(package), shell=True)
+
+    if return_code == 0:
+
+        #Read package file
+        with open(PKG_FILE) as f:
+            pkgs = [line.strip() for line in f.readlines()]
+
+            #Check if package is already in package list
+            if package in pkgs:
+                print('{} is already perminstalled.'.format(package))
+                sys.exit(0)
+
+
+            pkgs.append(package)
+            pkgs.sort()
+
+            with open(PKG_FILE, 'w') as f:
+                f.writelines('\n'.join(pkgs))

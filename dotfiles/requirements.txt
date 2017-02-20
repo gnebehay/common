@@ -1,0 +1,12 @@
+argcomplete
+argparse
+ipdb
+ipython
+jedi
+jinja2
+markdown
+matplotlib
+numpy
+pandas==0.19.0
+scipy
+sklearn

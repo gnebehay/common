@@ -1,0 +1,101 @@
+#!/usr/bin/env python
+
+import argparse
+import cv2
+import cvseq
+import numpy as np
+import os.path
+import sys
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('dataset')
+    parser.add_argument('sequence')
+    parser.add_argument('tracker_file')
+    parser.add_argument('tracker')
+
+    args = parser.parse_args()
+
+if len(sys.argv) > 1:
+    dir_entry = sys.argv[1]
+else:
+    dir_entry = '.'
+
+if len(sys.argv) > 2:
+    input_files = sys.argv[2:]
+else:
+    input_files = ['groundtruth.txt']
+
+colors = [(255,0,0),(0,255,0),(0,0,255)]
+
+print 'checking', dir_entry
+
+#Check for groundtruth
+gts = []
+for input_file in input_files:
+    gt_file = os.path.join(dir_entry, input_file)
+
+    if not os.path.exists(gt_file):
+        raise Exception('No input file ' + gt_file)
+    gt = np.genfromtxt(gt_file, delimiter=',')
+    gts.append(gt)
+
+#Test whether directory contains 00000001.jpg
+if os.path.exists(os.path.join(dir_entry, '00000001.jpg')):
+    file_ext = '.jpg'
+else:
+    file_ext = '.png'
+
+num_frames = gts[0].shape[0]
+
+#Create list of images
+im_list = []
+for i in range(1,num_frames+1):
+    im_file = '{0:08d}{1}'.format(i,file_ext)
+    im_path = os.path.join(dir_entry, im_file)
+    im_list.append(im_path)
+
+cv2.namedWindow(dir_entry)
+num_frames = len(im_list)
+frame = 0
+
+while True:
+    print 'frame', frame
+    im_path = im_list[frame]
+    if not os.path.exists(im_path):
+        raise Exception(im_path + ' does not exist')
+    im = cv2.imread(im_path)
+
+    for gt, color_ind in zip(gts, range(len(gts))):
+        gt_frame = gt[frame]
+        if not np.any(np.isnan(gt_frame)):
+            tl = gnebehay.array_to_int_tuple(gt_frame[:2])
+            br = gnebehay.array_to_int_tuple(gt_frame[:2] + gt_frame[2:4])
+            color = colors[color_ind % len(colors)]
+            cv2.rectangle(im, tl, br, color, thickness=4)
+
+    cv2.imshow(dir_entry, im)
+    key = cv2.waitKey(0)
+    key = chr(key & 255)
+
+    if key == 'q':
+        break
+    elif key == 'Q':
+        frame -= 2 #Go back one frame
+    elif key == 'P':
+        frame = -1
+    elif key == 'W':
+        frame = num_frames
+    elif key == 'm':
+        frame = num_frames / 2
+    elif key == 'V':
+        frame += num_frames / 100
+    elif key == 'U':
+        frame -= num_frames / 100
+
+    frame += 1
+
+    #Don't go out of bounds
+    frame = max(frame, 0)
+    frame = min(frame, num_frames-1)

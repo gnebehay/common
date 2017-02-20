@@ -1,0 +1,13 @@
+_perm_install()
+{
+    local cur prev
+
+    COMPREPLY=()
+    cur=${COMP_WORDS[COMP_CWORD]}
+    prev=${COMP_WORDS[COMP_CWORD-1]}
+
+    COMPREPLY=( $( apt-cache pkgnames $cur 2> /dev/null ) );
+    return 0
+}
+
+complete -f -F _perm_install debian-perminstall

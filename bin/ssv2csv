@@ -1,0 +1,18 @@
+#!/usr/bin/env python
+
+import numpy as np
+import sys
+
+input_file = sys.argv[1]
+
+output_file = input_file
+
+if len(sys.argv) > 2:
+	output_file = sys.argv[2]
+
+#Default delimiter is blank
+A = np.genfromtxt(input_file)
+
+#Change delimiter to comma
+np.savetxt(output_file, A, fmt='%.2f', delimiter=',')
+

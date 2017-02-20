@@ -1,0 +1,9 @@
+#!/usr/bin/env python
+import random as r
+
+#Force latexmk remake
+random_useless_string = '\\newcommand{{\\randomUselessString}}{{{0}}}'.format(r.random())
+
+with open('remake.tex', 'w') as f:
+    f.write(random_useless_string)
+
