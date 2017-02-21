@@ -36,18 +36,8 @@ for package in autocomplete-python autocomplete-paths language-latex linter-flak
     if [[ ! -d "$HOME/.atom/packages/$package" ]]
     then
         apm install $package
-
-        if [ $package == vim-mode ]; then
-
-            echo "Patching vim mode"
-
-            patch ~/.atom/packages/vim-mode/lib/vim-state.coffee vim-state.coffee.patch
-
-        fi
     fi
-
 done
-
 
 #Symlink dotfiles
 python link.py
