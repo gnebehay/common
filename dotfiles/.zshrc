@@ -119,7 +119,7 @@ fi
 export PYTHONPATH="$DROPBOX/common/py:$DROPBOX/code/locatee-test"
 
 export JAVA_HOME='/opt/jdk/jdk1.7.0_79'
-export PATH="/sbin:/home/$USER/.local/bin:$DROPBOX/common/bin:$JAVA_HOME/bin:$PATH"
+export PATH="/sbin:/home/$USER/.local/bin:$DROPBOX/misc/common/bin:$JAVA_HOME/bin:$PATH"
 export HISTTIMEFORMAT="%d/%m/%y %T "
 export EDITOR=vi
 export IPDB_CONTEXT_SIZE=49
