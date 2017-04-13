@@ -8,7 +8,7 @@ import os
 import shutil
 
 def copyIfNotExists(template, output_file=None):
-    ROOT = os.path.join(os.environ['DROPBOX'], 'common/tex')
+    ROOT = os.path.join(os.environ['DROPBOX'], 'misc/common/tex')
 
     if output_file is None:
         output_file = template
