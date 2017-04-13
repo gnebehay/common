@@ -85,8 +85,6 @@ source $ZSH/oh-my-zsh.sh
 #
 
 ### Begin customization
-#zstyle ':completion:*' special-dirs true
-#
 autoload -Uz compinit promptinit
 compinit
 promptinit
@@ -100,8 +98,21 @@ bindkey "^R" history-incremental-search-backward
 bindkey '^N' expand-or-complete
 bindkey '^P' reverse-menu-complete
 bindkey '^O' accept-line
+bindkey '^[OH' beginning-of-line
+bindkey -a '^[OH' beginning-of-line
+bindkey '^[OF' end-of-line
+bindkey -a '^[OF' end-of-line
+bindkey '^[[3~' delete-char
+bindkey -a '^[[3~' delete-char
+bindkey '^[[5~' up-line
+bindkey -a '^[[5~' up-line
+bindkey '^[[6~' down-line
+bindkey -a '^[[6~' down-line
+
+bindkey -s "^[OM" "^M"
 
 alias rmt=gvfs-trash
+alias cp='cp -i'
 alias rm='rm -i'
 alias mv='mv -i'
 alias xclip='xclip -selection c'
@@ -123,4 +134,3 @@ export PATH="/sbin:/home/$USER/.local/bin:$DROPBOX/common/bin:$JAVA_HOME/bin:$PA
 export HISTTIMEFORMAT="%d/%m/%y %T "
 export EDITOR=vi
 export IPDB_CONTEXT_SIZE=49
-
