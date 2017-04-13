@@ -20,10 +20,11 @@ xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
 sudo sed -i s/#HandleLidSwitch=suspend/HandleLidSwitch=ignore/ /etc/systemd/logind.conf
 
 # Enable automatic login for user georg
-if [ $USER = "georg" ]; then
-    sudo sed -i 's/#  AutomaticLoginEnable = true/AutomaticLoginEnable = true/' /etc/gdm3/daemon.conf
-    sudo sed -i 's/#  AutomaticLogin = user1/AutomaticLogin = georg/' /etc/gdm3/daemon.conf
-fi
+# Don't to that, we have to determine if this is a locatee machine
+#if [ $USER = "georg" ]; then
+#    sudo sed -i 's/#  AutomaticLoginEnable = true/AutomaticLoginEnable = true/' /etc/gdm3/daemon.conf
+#    sudo sed -i 's/#  AutomaticLogin = user1/AutomaticLogin = georg/' /etc/gdm3/daemon.conf
+#fi
 
 PKG_OK=$(dpkg-query -W --showformat='${Status}\n' gnome-icon-theme-gartoon-redux|grep "install ok installed")
 echo Checking for gartoon: $PKG_OK
@@ -43,7 +44,9 @@ done
 python link.py
 
 # Afterwards, copy the letter templates over
-cp "$DROPBOX/misc/letter_templates/*" texmf/tex/latex/myletter/
+rm -r ~/texmf/tex/latex/myletter/
+mkdir -p ~/texmf/tex/latex/myletter/
+cp "$DROPBOX/org/letter_templates"/* ~/texmf/tex/latex/myletter/
 
 cat dconf | dconf load /
 
