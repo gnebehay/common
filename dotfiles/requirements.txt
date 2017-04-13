@@ -4,6 +4,7 @@ ipdb
 ipython
 jedi
 jinja2
+jupyter
 markdown
 matplotlib
 numpy
