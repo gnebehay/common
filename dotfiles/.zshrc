@@ -56,6 +56,8 @@ plugins=(git vi-mode command-not-found)
 # export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
+DISABLE_AUTO_UPDATE="true"
+
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -85,8 +87,6 @@ source $ZSH/oh-my-zsh.sh
 #
 
 ### Begin customization
-#zstyle ':completion:*' special-dirs true
-#
 autoload -Uz compinit promptinit
 compinit
 promptinit
@@ -100,14 +100,28 @@ bindkey "^R" history-incremental-search-backward
 bindkey '^N' expand-or-complete
 bindkey '^P' reverse-menu-complete
 bindkey '^O' accept-line
+bindkey '^[OH' beginning-of-line
+bindkey -a '^[OH' beginning-of-line
+bindkey '^[OF' end-of-line
+bindkey -a '^[OF' end-of-line
+bindkey '^[[3~' delete-char
+bindkey -a '^[[3~' delete-char
+bindkey '^[[5~' up-line
+bindkey -a '^[[5~' up-line
+bindkey '^[[6~' down-line
+bindkey -a '^[[6~' down-line
+
+bindkey -s "^[OM" "^M"
 
 alias rmt=gvfs-trash
+alias cp='cp -i'
 alias rm='rm -i'
 alias mv='mv -i'
 alias xclip='xclip -selection c'
 alias python='python3'
 alias pip='pip3'
 alias ipython='ipython3'
+alias mysql="mysql --pager='less -S'"
 
 export DROPBOX="/home/$USER/Dropbox"
 
@@ -117,10 +131,6 @@ fi
 
 #The latter one is for locatee only
 export PYTHONPATH="$DROPBOX/common/py:$DROPBOX/code/locatee-test"
-
-export JAVA_HOME='/opt/jdk/jdk1.7.0_79'
-export PATH="/sbin:/home/$USER/.local/bin:$DROPBOX/misc/common/bin:$JAVA_HOME/bin:$PATH"
+export PATH="/sbin:/home/$USER/.local/bin:$DROPBOX/common/bin:$PATH"
 export HISTTIMEFORMAT="%d/%m/%y %T "
 export EDITOR=vi
-export IPDB_CONTEXT_SIZE=49
-

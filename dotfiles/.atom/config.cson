@@ -12,6 +12,9 @@
     autocompleteSmartQuotes: false
   core:
     autoHideMenuBar: true
+    disabledPackages: [
+      "spell-check"
+    ]
     telemetryConsent: "limited"
     themes: [
       "atom-dark-ui"
@@ -22,9 +25,7 @@
     preferredLineLength: 100
   "exception-reporting":
     userId: "2e2ea295-a6ba-aca6-c132-defba700ff58"
-  linter:
-    errorPanelHeight: 171
-    showErrorPanel: false
+  linter: {}
   "linter-flake8":
     flakeErrors: true
     ignoreErrorCodes: [
@@ -38,6 +39,8 @@
     pep8ErrorsToWarnings: true
   minimap:
     absoluteMode: true
+  "tree-view":
+    hideVcsIgnoredFiles: false
   "vim-mode":
     useSmartcaseForSearch: true
   "vim-mode-plus":

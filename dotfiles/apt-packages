@@ -33,7 +33,6 @@ texlive-pictures-doc
 texlive-publishers
 texlive-science
 unattended-upgrades
-valgrind
-virtualbox
+virtualbox-5.1
 xclip
 zsh

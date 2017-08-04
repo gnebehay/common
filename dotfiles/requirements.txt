@@ -4,9 +4,11 @@ ipdb
 ipython
 jedi
 jinja2
+jupyter
 markdown
 matplotlib
 numpy
-pandas==0.19.0
+pandas
+parse
 scipy
 sklearn

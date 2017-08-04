@@ -1,5 +1,9 @@
 '.source.python':
 
+  'ipdb with context':
+    'prefix': 'ipdb'
+    'body': 'import ipdb; ipdb.set_trace(context=49)'
+
   'import pandas':
     'prefix': 'pd'
     'body': 'import pandas as pd'
