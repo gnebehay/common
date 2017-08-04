@@ -1,7 +1,12 @@
 #!/bin/bash
 
-#Add atom repository
-sudo cp webupd8-atom.list /etc/apt/sources.list.d/
+#Add atom, virtualbox repository
+sudo cp webupd8-atom.list virtualbox.list /etc/apt/sources.list.d/
+
+#Import key?
+curl -O https://www.virtualbox.org/download/oracle_vbox_2016.asc
+sudo apt-key add oracle_vbox_2016.asc
+rm oracle_vbox_2016.asc
 
 #Install files from apt-packages
 sudo apt-get install $(< apt-packages)

@@ -56,6 +56,8 @@ plugins=(git vi-mode command-not-found)
 # export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
+DISABLE_AUTO_UPDATE="true"
+
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -119,6 +121,7 @@ alias xclip='xclip -selection c'
 alias python='python3'
 alias pip='pip3'
 alias ipython='ipython3'
+alias mysql="mysql --pager='less -S'"
 
 export DROPBOX="/home/$USER/Dropbox"
 
@@ -128,9 +131,6 @@ fi
 
 #The latter one is for locatee only
 export PYTHONPATH="$DROPBOX/common/py:$DROPBOX/code/locatee-test"
-
-export JAVA_HOME='/opt/jdk/jdk1.7.0_79'
-export PATH="/sbin:/home/$USER/.local/bin:$DROPBOX/common/bin:$JAVA_HOME/bin:$PATH"
+export PATH="/sbin:/home/$USER/.local/bin:$DROPBOX/common/bin:$PATH"
 export HISTTIMEFORMAT="%d/%m/%y %T "
 export EDITOR=vi
-export IPDB_CONTEXT_SIZE=49

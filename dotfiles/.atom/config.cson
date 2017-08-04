@@ -12,6 +12,9 @@
     autocompleteSmartQuotes: false
   core:
     autoHideMenuBar: true
+    disabledPackages: [
+      "spell-check"
+    ]
     telemetryConsent: "limited"
     themes: [
       "atom-dark-ui"
@@ -36,6 +39,8 @@
     pep8ErrorsToWarnings: true
   minimap:
     absoluteMode: true
+  "tree-view":
+    hideVcsIgnoredFiles: false
   "vim-mode":
     useSmartcaseForSearch: true
   "vim-mode-plus":
