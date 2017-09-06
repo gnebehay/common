@@ -11,6 +11,7 @@
 .latexmkrc
 .local/share/applications/terminal_atom.desktop
 .screenrc
+.tmux
 .vimrc
 .zshrc
 texmf
