@@ -131,6 +131,6 @@ fi
 
 #The latter one is for locatee only
 export PYTHONPATH="$DROPBOX/common/py:$DROPBOX/code/locatee-test"
-export PATH="/sbin:/home/$USER/.local/bin:$DROPBOX/common/bin:$PATH"
+export PATH="/sbin:/home/$USER/.local/bin:$DROPBOX/common/bin:$DROPBOX/misc/common/bin:$PATH"
 export HISTTIMEFORMAT="%d/%m/%y %T "
 export EDITOR=vi

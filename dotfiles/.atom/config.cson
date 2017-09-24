@@ -25,7 +25,8 @@
     preferredLineLength: 100
   "exception-reporting":
     userId: "2e2ea295-a6ba-aca6-c132-defba700ff58"
-  linter: {}
+  linter:
+    showErrorPanel: false
   "linter-flake8":
     flakeErrors: true
     ignoreErrorCodes: [
