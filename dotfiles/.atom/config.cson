@@ -49,6 +49,7 @@
     flashOnUndoRedo: false
     flashScreenOnSearchHasNoMatch: false
     groupChangesWhenLeavingInsertMode: false
+    notifiedCoffeeScriptNoLongerSupportedToExtendVMP: true
     useClipboardAsDefaultRegister: true
     useSmartcaseForSearch: true
   "vim-surround":

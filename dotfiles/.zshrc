@@ -87,6 +87,7 @@ source $ZSH/oh-my-zsh.sh
 #
 
 ### Begin customization
+unsetopt share_history
 autoload -Uz compinit promptinit
 compinit
 promptinit
@@ -130,7 +131,7 @@ if [ "$USER" = "locatee" ]; then
 fi
 
 #The latter one is for locatee only
-export PYTHONPATH="$DROPBOX/common/py:$DROPBOX/code/locatee-test"
+export PYTHONPATH="$DROPBOX/common/py:$DROPBOX/experiments/locatee-test"
 export PATH="/sbin:/home/$USER/.local/bin:$DROPBOX/common/bin:$PATH"
 export HISTTIMEFORMAT="%d/%m/%y %T "
 export EDITOR=vi
