@@ -109,7 +109,7 @@ fi
 complete -F _debconf_show debian-perminstall
 
 export JAVA_HOME='/opt/jdk/jdk1.7.0_79'
-export PATH="$DROPBOX/common/bin:$JAVA_HOME/bin:$PATH"
+export PATH="$DROPBOX/common/bin:$JAVA_HOME/bin:/home/$USER/node_modules/.bin:$PATH"
 export HISTTIMEFORMAT="%d/%m/%y %T "
 alias vless='/usr/share/vim/vim74/macros/less.sh'
 alias rmt=gvfs-trash
