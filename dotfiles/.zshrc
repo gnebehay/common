@@ -87,6 +87,7 @@ source $ZSH/oh-my-zsh.sh
 #
 
 ### Begin customization
+unsetopt share_history
 autoload -Uz compinit promptinit
 compinit
 promptinit
@@ -121,7 +122,7 @@ alias xclip='xclip -selection c'
 alias python='python3'
 alias pip='pip3'
 alias ipython='ipython3'
-alias mysql="mysql --pager='less -S'"
+alias mysql="mysql --pager='less -SFX'"
 
 export DROPBOX="/home/$USER/Dropbox"
 
@@ -130,7 +131,7 @@ if [ "$USER" = "locatee" ]; then
 fi
 
 #The latter one is for locatee only
-export PYTHONPATH="$DROPBOX/common/py:$DROPBOX/code/locatee-test"
-export PATH="/sbin:/home/$USER/.local/bin:$DROPBOX/common/bin:$DROPBOX/misc/common/bin:$PATH"
+export PYTHONPATH="$DROPBOX/common/py:$DROPBOX/experiments/locatee-test"
+export PATH="/sbin:/home/$USER/.local/bin:$DROPBOX/common/bin:/home/$USER/node_modules/.bin:$PATH"
 export HISTTIMEFORMAT="%d/%m/%y %T "
 export EDITOR=vi

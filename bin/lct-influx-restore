@@ -1,0 +1,11 @@
+#!/bin/bash
+
+sudo rm -rf /tmp/influx-restore
+cp -r $1 /tmp/influx-restore
+sudo chown -R influxdb:influxdb /tmp/influx-restore
+sudo service influxdb start
+influx -execute "DROP DATABASE locatee;"
+sudo service influxdb stop
+sudo -u influxdb influxd restore -metadir /var/lib/influxdb/meta /tmp/influx-restore
+sudo -u influxdb influxd restore -database locatee -datadir /var/lib/influxdb/data /tmp/influx-restore
+sudo service influxdb start

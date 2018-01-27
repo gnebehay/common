@@ -2,6 +2,7 @@
   Hydrogen:
     startupCode: "{\"Python 3\": \"%matplotlib inline\"}"
   "autocomplete-plus":
+    enableAutoActivation: false
     useCoreMovementCommands: false
   "autocomplete-python":
     pythonPaths: "/usr/bin/python3"
@@ -35,6 +36,7 @@
       "E302"
       "E701"
       "E226"
+      "E127"
     ]
     maxLineLength: 100
     pep8ErrorsToWarnings: true
@@ -50,6 +52,7 @@
     flashOnUndoRedo: false
     flashScreenOnSearchHasNoMatch: false
     groupChangesWhenLeavingInsertMode: false
+    notifiedCoffeeScriptNoLongerSupportedToExtendVMP: true
     useClipboardAsDefaultRegister: true
     useSmartcaseForSearch: true
   "vim-surround":
