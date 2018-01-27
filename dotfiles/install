@@ -38,7 +38,7 @@ if [ "" == "$PKG_OK" ]; then
     sudo dpkg -i gnome-icon-theme-gartoon-redux_1.10-0ubuntu3_all.deb
 fi
 
-for package in autocomplete-python autocomplete-paths language-latex linter-flake8 vim-mode-plus jumpy hydrogen file-icons; do
+for package in autocomplete-python autocomplete-paths language-latex linter-flake8 vim-mode-plus jumpy hydrogen file-icons split-diff; do
     if [[ ! -d "$HOME/.atom/packages/$package" ]]
     then
         apm install $package
