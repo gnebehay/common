@@ -5,10 +5,6 @@ filetype indent on
 
 syntax on
 
-inoremap <C-H> <C-X><C-F>
-nmap K i<CR><Esc>k$
-nmap <C-i> o<Esc>k
-nmap <C-o> O<Esc>j
 noremap Y y$
 
 set wildmenu
@@ -20,7 +16,7 @@ set number
 set splitright
 set directory=/tmp
 set undodir=/tmp " where to save undo histories
-set undofile                " Save undo's after file closes
+set undofile " Save undo's after file closes
 set nowritebackup
 set tabstop=4
 set shiftwidth=4
