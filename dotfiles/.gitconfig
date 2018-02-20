@@ -14,6 +14,9 @@
 	tool = meld
 [mergetool]
 	prompt = 0
+[mergetool "meld"]
+    cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
+    #cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED"
 [color "status"]
 	added = green bold
 	changed = yellow bold
