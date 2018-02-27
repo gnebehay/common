@@ -25,3 +25,4 @@ set expandtab
 set laststatus=1
 set noshowcmd
 set scrolloff=2
+set clipboard=unnamedplus

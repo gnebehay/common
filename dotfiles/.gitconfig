@@ -10,6 +10,8 @@
 	prompt = 0
 [diff]
 	tool = meld
+[difftool "meld"]
+        cmd = meld "$LOCAL" "$REMOTE"
 [merge]
 	tool = meld
 [mergetool]
