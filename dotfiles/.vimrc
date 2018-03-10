@@ -26,3 +26,4 @@ set laststatus=1
 set noshowcmd
 set scrolloff=2
 set clipboard=unnamedplus
+autocmd VimLeave * call system("xsel -ib", getreg('+'))
