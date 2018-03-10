@@ -32,8 +32,6 @@
     flakeErrors: true
     ignoreErrorCodes: [
       "E303"
-      "E261"
-      "E302"
       "E701"
       "E226"
       "E127"

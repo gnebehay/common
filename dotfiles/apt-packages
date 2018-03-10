@@ -17,5 +17,6 @@ pandoc
 unattended-upgrades
 tmux
 virtualbox-5.2
+vim-gnome
 xclip
 zsh

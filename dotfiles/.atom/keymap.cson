@@ -19,6 +19,7 @@
 
 'body':
   'ctrl-q': 'unset!'
+  'ctrl-h': 'find-and-replace:show'
 
 'atom-workspace atom-text-editor:not([mini])':
   'ctrl-down': 'unset!'
