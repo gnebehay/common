@@ -26,8 +26,7 @@
     preferredLineLength: 100
   "exception-reporting":
     userId: "2e2ea295-a6ba-aca6-c132-defba700ff58"
-  linter:
-    showErrorPanel: false
+  linter: {}
   "linter-flake8":
     flakeErrors: true
     ignoreErrorCodes: [
@@ -52,7 +51,6 @@
     flashOnUndoRedo: false
     flashScreenOnSearchHasNoMatch: false
     groupChangesWhenLeavingInsertMode: false
-    notifiedCoffeeScriptNoLongerSupportedToExtendVMP: true
     useClipboardAsDefaultRegister: true
     useSmartcaseForSearch: true
   "vim-surround":
