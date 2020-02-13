@@ -7,6 +7,7 @@ syntax on
 
 noremap Y y$
 
+set mouse=
 set wildmenu
 set wildmode=longest,list
 set ignorecase
